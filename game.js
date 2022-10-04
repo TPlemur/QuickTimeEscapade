@@ -39,16 +39,32 @@ options = {
 
 function update() {
     if (!ticks) {
-        //initialize objects
+        //initialize timer and first node
         timerDot = {pos: vec((G.WIDTH-2), (G.HEIGHT-2))};
-        timerMax = G.TICKS*5 //tick rate * seconds
-        timerTime = timerMax
         currentNode = wake;
+        timerMax = G.TICKS*currentNode.time //tick rate * seconds
+        timerTime = timerMax
+
     }
+    
+    //move to next node when timer expires
     if(timerTime <= 0){
-        //reset timer
+        //end game if necessasary
         if(currentNode.Tnext == null){end();}
+        //move to next node
         currentNode = currentNode.Tnext;
+        //reset timer
+        timerMax = currentNode.time * G.TICKS;
+        timerTime = timerMax;
+    }
+
+    //move to next node when pressed
+    if(input.isJustPressed){
+        //end game if necessasary
+        if(currentNode.Pnext == null){end();}
+        //move to next node
+        currentNode = currentNode.Pnext;
+        //reset timer
         timerMax = currentNode.time * G.TICKS;
         timerTime = timerMax;
     }
