@@ -22,7 +22,7 @@ kickPod = {
 waitPod ={   
     time: 1,
     Pnext: null,
-    Tnext: null, //tempREPLACE LATER
+    Tnext: null,
     text: "waitPod"
 }
 
@@ -33,11 +33,8 @@ wake = {
     text: "You wake up with no \nmemory inside a pod\n Press to kick open"
 },
 
-waitPod.Tnext = wake;
-
 options = {
     viewSize: {x: G.WIDTH, y:G.HEIGHT},
-    isReplayEnabled:true
 };
 
 function update() {
@@ -50,6 +47,7 @@ function update() {
     }
     if(timerTime <= 0){
         //reset timer
+        if(currentNode.Tnext == null){end();}
         currentNode = currentNode.Tnext;
         timerMax = currentNode.time * G.TICKS;
         timerTime = timerMax;
