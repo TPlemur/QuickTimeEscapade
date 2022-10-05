@@ -98,6 +98,12 @@ wake = {
     Tnext: waitPod,
     text: "You wake up with no \nmemory inside a pod\n\nPress to kick open"
 },
+start = {
+    time: 5,
+    Pnext: wake,
+    Tnext: wake,
+    text: "Wait to see \nwhat happens\nor\nPress to act"
+}
 
 //Actual code of the game
 options = {
@@ -108,7 +114,7 @@ function update() {
     if (!ticks) {
         //initialize timer and first node
         timerDot = {pos: vec((G.WIDTH-2), (G.HEIGHT-2))};
-        currentNode = wake; //should be "wake" for final game
+        currentNode = start; //should be "wake" for final game
         timerMax = G.TICKS*currentNode.time //tick rate * seconds
         timerTime = timerMax
 
