@@ -8,20 +8,75 @@ characters = [];
 const G ={
    WIDTH: 150,
    HEIGHT: 150, 
-   TICKS: 60
+   TICKS: 60,
+   DIFFY: 0.7
 };
 
 //Define all story nodes (in reverse order)
+soldierOverCrate = {
+    time: 20,
+    Pnext: null, //intentional end
+    Tnext: null, //intentional end
+    text: "A soldier climbs \nover the crates \nand shoots you\n\nYou die"
+}
+hideInDoor = {
+    time: 5,
+    Pnext: null,
+    Tnext: null,
+    text: "You duck into a \nnearby door, ending \nface to face with \na tall stern woman\n\nPress to leave"
+}
+fireEscape = {
+    time: 5,
+    Pnext: null,
+    Tnext: soldierOverCrate,
+    text: "As you run you \nsee a fire escape\n\nPress to climb"
+}
+crates = {
+    time: 5,
+    Pnext: hideInDoor,
+    Tnext: fireEscape,
+    text: "The crates fall into \nthe soldier's path\n\nPress to hide"
+}
+alleyway = {
+    time: 5,
+    Pnext: crates,
+    Tnext: fireEscape,
+    text: "you dash into the \nalleyway, soldiers \nhot on your heals\n\nPress to knock over \nsome crates"
+}
+guardRush = {
+    time: 5,
+    Pnext: null,//intentional end
+    Tnext: null,//intentional end
+    text: "soldiers rush out,\nsurround you,\nand kill you\n\nyou died"
+}
+landedOnStreet= {
+    time: 5,
+    Pnext: alleyway,
+    Tnext: guardRush,
+    text: "As you land a voice \nshouts \"Zethos this \nway!\"\n\nPress to go"
+}
+hanging = {
+    time: 5,
+    Pnext: landedOnStreet,
+    Tnext: guardRush,
+    text: "you hang from a ledge\n\nPress to let go"
+}
+falling = {
+    time: 5,
+    Pnext: hanging,
+    Tnext: landedOnStreet,
+    text: "You smash through \nthe second story \nwindow\n\nPress to grab \nthe ledge"
+}
+//SPELLCHECKED BELOW
 soldiersInCoridor = {
     time: 20,
     Pnext: null, //Intentional end
     Tnext: null, //Intentional end
     text: "A group of soldiers \nrush out of a nearby \nstairwell and shoot you \n\nyou die"
 }
-//UNFINISHED BRANCH
 windowAhead = {
     time: 5,
-    Pnext: null, //RESISTANCE BRANCH
+    Pnext: falling,
     Tnext: soldiersInCoridor,
     text: "As you pass identical \nrooms with pods, you \napproach a window.\n\nPress to \njump through the window"
 }
@@ -115,7 +170,7 @@ function update() {
         //initialize timer and first node
         timerDot = {pos: vec((G.WIDTH-2), (G.HEIGHT-2))};
         currentNode = start; //should be "wake" for final game
-        timerMax = G.TICKS*currentNode.time //tick rate * seconds
+        timerMax = G.TICKS*currentNode.time*G.DIFFY //tick rate * seconds
         timerTime = timerMax
 
     }
@@ -127,8 +182,9 @@ function update() {
         //move to next node
         currentNode = currentNode.Tnext;
         //reset timer
-        timerMax = currentNode.time * G.TICKS;
+        timerMax = currentNode.time * G.TICKS*G.DIFFY;
         timerTime = timerMax;
+        addScore(1)
     }
 
     //move to next node when pressed
@@ -138,8 +194,9 @@ function update() {
         //move to next node
         currentNode = currentNode.Pnext;
         //reset timer
-        timerMax = currentNode.time * G.TICKS;
+        timerMax = currentNode.time * G.TICKS*G.DIFFY;
         timerTime = timerMax;
+        addScore(1)
     }
 
     //update timerDotPos & render
