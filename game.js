@@ -12,11 +12,17 @@ const G ={
 };
 
 //Define all story nodes (in reverse order)
+soldiersInCoridor = {
+    time: 20,
+    Pnext: null, //Intentional end
+    Tnext: null, //Intentional end
+    text: "A group of soldiers \nrush out of a nearby \nstairwell and shoot you \n\nyou die"
+}
 //UNFINISHED BRANCH
 windowAhead = {
     time: 5,
-    Pnext: null,
-    Tnext: null,
+    Pnext: null, //RESISTANCE BRANCH
+    Tnext: soldiersInCoridor,
     text: "As you pass identical \nrooms with pods, you \napproach a window.\n\nPress to \njump through the window"
 }
 turret = {
