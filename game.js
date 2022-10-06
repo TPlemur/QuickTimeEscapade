@@ -13,21 +13,88 @@ const G ={
 };
 
 //Define all story nodes (in reverse order)
+//
+resistanceOpp = {
+    time: 5,
+    Pnext: null,
+    Tnext: null,
+    text: "END OF DEMO,\nThe resistance won,\nCongradulations"
+}
+noHelpEnd = {
+    time: 20,
+    Pnext: null,//intentional end
+    Tnext: null,//intentional end
+    text: "Hours later soldiers \nburst in, the op failed, \nthe resistance is dead, \nand now you too, \nare dead"
+}
+noHelpQuestion = {
+    time: 5,
+    Pnext: resistanceOpp,
+    Tnext: noHelpEnd,
+    text: "\"No? ok wait here, \nI'll come back when \nwe're done\"\n\nPress to go with her"
+}
+aboutToStart = {
+    time: 5,
+    Pnext: resistanceOpp,
+    Tnext: noHelpQuestion,
+    text: "\"Come on, the opp is \nabout the start, \nyou in?\"\n\nPress to say \"yes\""
+}
+helpAnyway = {
+    time: 5,
+    Pnext: resistanceOpp,
+    Tnext: noHelpQuestion,
+    text: "\"Danm, we could use \nyour help anyway\"\n\nPress to say \"I'm in\""
+}
+wiped = {
+    time: 5,
+    Pnext: helpAnyway,
+    Tnext: helpAnyway,
+    text: "\"Zeth?, oh bloody arc! \nthey wiped you didn't \nthey\"\n\nPress to say \"yes\""
+}
+topOfFireEscape = {
+    time: 5,
+    Pnext: wiped,
+    Tnext: aboutToStart,
+    text: "\"Good to have you back \nzeth\" a woman says \nwhile pulling the \nladder up\n\nPress to say \"who?\""
+}
+upstarirs = { 
+    time: 5,
+    Pnext: wiped,
+    Tnext: aboutToStart,
+    text: "A woman greets you at \nthe top of the stairs \n\"Good to have you \nback zeth\"\n\nPress to say \"who?\""
+}
+soldierBurstIn = {
+    time: 20,
+    Pnext: null,//intentional end
+    Tnext: null,//intentional end
+    text: "A soldier burst in \nbehind you, and \nshoots you\n\nYou Die"
+}
 soldierOverCrate = {
     time: 20,
     Pnext: null, //intentional end
     Tnext: null, //intentional end
     text: "A soldier climbs \nover the crates \nand shoots you\n\nYou die"
 }
+backOutOfDoor = {
+    time: 20,
+    Pnext: null, //intentional End 
+    Tnext: null, //intentional End
+    text: "You come face to \nface with a soldier, \nwho shoots you.\n\nYou die"
+}
+happyBoss = {
+    time: 5,
+    Pnext: upstarirs,
+    Tnext: soldierBurstIn,
+    text: "\"Boss'l be happy to \nsee you zeth, get \nupstairs i'll handle \nthe guard\"\n\nPress to go up"
+}
 hideInDoor = {
     time: 5,
-    Pnext: null,
-    Tnext: null,
+    Pnext: backOutOfDoor,
+    Tnext: happyBoss,
     text: "You duck into a \nnearby door, ending \nface to face with \na tall stern woman\n\nPress to leave"
 }
 fireEscape = {
     time: 5,
-    Pnext: null,
+    Pnext: topOfFireEscape,
     Tnext: soldierOverCrate,
     text: "As you run you \nsee a fire escape\n\nPress to climb"
 }
@@ -41,7 +108,7 @@ alleyway = {
     time: 5,
     Pnext: crates,
     Tnext: fireEscape,
-    text: "you dash into the \nalleyway, soldiers \nhot on your heals\n\nPress to knock over \nsome crates"
+    text: "you dash into the \nalleyway, soldiers \nhot on your heels\n\nPress to knock over \nsome crates"
 }
 guardRush = {
     time: 5,
@@ -67,7 +134,6 @@ falling = {
     Tnext: landedOnStreet,
     text: "You smash through \nthe second story \nwindow\n\nPress to grab \nthe ledge"
 }
-//SPELLCHECKED BELOW
 soldiersInCoridor = {
     time: 20,
     Pnext: null, //Intentional end
