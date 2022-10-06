@@ -13,12 +13,18 @@ const G ={
 };
 
 //Define all story nodes (in reverse order)
-//
-resistanceOpp = {
-    time: 5,
+demoEnd = {
+    time: 20,
     Pnext: null,
     Tnext: null,
-    text: "END OF DEMO,\nThe resistance won,\nCongradulations"
+    text: "END OF DEMO"
+}
+//DEMO END FOR RESISTANCE BRANCH
+resistanceOpp = {
+    time: 5,
+    Pnext: demoEnd,
+    Tnext: demoEnd,
+    text: "You aid the resistance \nin overthrowing the \nempire."
 }
 noHelpEnd = {
     time: 20,
@@ -164,11 +170,17 @@ run = {
     Tnext: turret,
     text: "You crash into the \ndoor of the small \nroom, it's locked\n\nPress to \nsmash the door"
 }
-//BRANCH UNFINISHED
+//DEMO END GOVERNMENT BRANCH
+killResistance = {
+    time: 20,
+    Pnext: demoEnd,
+    Tnext: demoEnd,
+    text: "With the team of \nsoldiers you storm \nthe building and kill \neveryone inside, as the \nlast rebel dies she whispers \n\"Zeth, why?\""
+}
 doIt = {
     time: 5,
     Pnext: run,
-    Tnext: null, //MISSION BRANCH...
+    Tnext: killResistance, //MISSION BRANCH...
     text: "\"We're going to \nput you back to \nsleep for transit \nto the operation\"\n\nPress to say \n\"HELL NO\" and run"
 }
 assumption = {
