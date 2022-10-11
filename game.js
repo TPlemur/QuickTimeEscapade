@@ -241,6 +241,8 @@ start = {
 //Actual code of the game
 options = {
     viewSize: {x: G.WIDTH, y:G.HEIGHT},
+    seed: 6,
+    isPlayingBgm: true
 };
 
 function update() {
